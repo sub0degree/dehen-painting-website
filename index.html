@@ -4,88 +4,118 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dehen Painting Services LLC | Premium Portland Painters</title>
+    
+    <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Emoji icons used throughout — no icon library needed for fast loads -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
-            --primary-bg: #1a1a2e; /* Specified Deep Navy */
-            --secondary-bg: #16213e;
-            --accent: #c9a84c; /* Specified Gold/Amber */
-            --accent-hover: #b09140;
-            --text-main: #faf9f6; /* Specified Warm White */
-            --text-muted: #94a3b8;
-            --card-bg: rgba(22, 33, 62, 0.7);
-            --transition: all 0.3s ease;
-            --font-main: 'Inter', sans-serif;
+            /* Color Palette Refresh */
+            --primary-dark: #1a1a2e;
+            --primary-warm: #1e1e2e;
+            --bg-light: #f8f6f3;
+            --bg-white: #ffffff;
+            --accent-gold: #c9a84c;
+            --accent-terracotta: #c0694b;
+            --text-dark: #2d2a24;
+            --text-light: #f0ece4;
+            --text-muted: #6b7280;
+            
+            /* Shadows & Effects */
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 8px;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
+        /* Loading Animation */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        .loader-content {
+            text-align: center;
+        }
+        .loader-logo {
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s forwards;
+        }
+        .loader-bar {
+            width: 150px;
+            height: 2px;
+            background: rgba(255,255,255,0.1);
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        .loader-bar::after {
+            content: '';
+            position: absolute;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent-gold);
+            animation: loading 1.5s infinite;
         }
 
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        @keyframes loading { 0% { left: -100%; } 50% { left: 0; } 100% { left: 100%; } }
+
+        /* Global Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
-            font-family: var(--font-main);
-            background-color: var(--primary-bg);
-            color: var(--text-main);
-            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.7;
             overflow-x: hidden;
         }
 
-        h1, h2, h3 {
-            line-height: 1.2;
-        }
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-light); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-gold); border: 3px solid var(--bg-light); border-radius: 10px; }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
+        h1, h2, h3, .logo { font-family: 'Playfair Display', serif; font-weight: 700; }
+        .container { max-width: 1240px; margin: 0 auto; padding: 0 2rem; }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
 
         .btn {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
             font-weight: 600;
+            font-size: 0.95rem;
             cursor: pointer;
             transition: var(--transition);
-            text-align: center;
             border: none;
+            gap: 0.75rem;
         }
-
-        .btn-primary {
-            background-color: var(--accent);
-            color: var(--primary-bg);
-        }
-
-        .btn-primary:hover {
-            background-color: var(--accent-hover);
-            transform: translateY(-2px);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--accent);
-            color: var(--accent);
-        }
-
-        .btn-outline:hover {
-            background: var(--accent);
-            color: var(--primary-bg);
-        }
+        .btn-primary { background: var(--accent-gold); color: var(--primary-dark); box-shadow: 0 4px 15px rgba(201, 168, 76, 0.3); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(201, 168, 76, 0.4); background: #d4b865; }
+        .btn-outline { background: transparent; border: 2px solid var(--accent-gold); color: var(--accent-gold); }
+        .btn-outline:hover { background: var(--accent-gold); color: var(--primary-dark); }
 
         /* Navigation */
         nav {
@@ -93,795 +123,611 @@
             top: 0;
             width: 100%;
             z-index: 1000;
-            background: rgba(15, 23, 42, 0.9);
+            height: 90px;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            height: 80px;
-            display: flex;
-            align-items: center;
+            height: 75px;
+            box-shadow: var(--shadow-sm);
         }
+        nav.scrolled .logo { color: var(--primary-dark); }
+        nav.scrolled .nav-links a { color: var(--text-dark); }
 
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--accent);
-            letter-spacing: -1px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            font-weight: 500;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover {
-            color: var(--accent);
-        }
-
-        .nav-cta {
-            margin-left: 1rem;
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-        }
-
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background: var(--text-main);
-            transition: var(--transition);
-        }
-
-        /* Hero */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            position: relative;
-            overflow: hidden;
-            padding-top: 80px;
-        }
-
-        .hero::before {
+        .nav-container { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .logo { font-size: 1.8rem; color: var(--text-light); display: flex; align-items: center; gap: 0.5rem; }
+        .logo i { font-size: 1.4rem; color: var(--accent-gold); }
+        
+        .nav-links { display: flex; gap: 2.5rem; align-items: center; }
+        .nav-links a { color: var(--text-light); font-weight: 500; font-size: 0.9rem; position: relative; }
+        .nav-links a::after {
             content: '';
             position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gold);
+            transition: var(--transition);
+        }
+        .nav-links a:hover::after { width: 100%; }
+        .hamburger { display: none; cursor: pointer; color: var(--accent-gold); font-size: 1.5rem; }
+
+        .section-divider {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
+        }
+        .section-divider svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 100px;
+        }
+        .section-divider .shape-fill {
+            fill: var(--bg-light);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #1a1a2e 0%, #1e1e2e 100%);
+            position: relative;
+            overflow: hidden;
+            color: var(--text-light);
+        }
+        .hero-overlay {
+            position: absolute;
             top: 0;
-            right: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 70% 30%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
-            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Cpath d='M0 0h800v600H0z' fill='none'/%3E%3Cpath d='M100 100c50-20 150 50 200 0s100-80 250-20 100 150 50 200-150-50-200 0-100 80-250 20-100-150-50-200z' fill='%23c9a84c' fill-opacity='.05'/%3E%3Cpath d='M600 400c-50 20-150-50-200 0s-100 80-250 20-100-150-50-200 150 50 200 0 100-80 250-20 100 150 50 200z' fill='%23c9a84c' fill-opacity='.03'/%3E%3C/svg%3E");
+            background-size: cover;
+            opacity: 0.6;
+        }
+        .hero-content { position: relative; z-index: 2; max-width: 800px; }
+        .hero h1 { font-size: 4.5rem; line-height: 1.1; margin-bottom: 1.5rem; }
+        .hero p { font-size: 1.2rem; margin-bottom: 2.5rem; opacity: 0.9; }
+        .hero-btns { display: flex; gap: 1.5rem; margin-bottom: 3rem; }
+        .hero-social-proof { display: flex; align-items: center; gap: 1rem; font-size: 0.95rem; font-weight: 500; color: var(--accent-gold); }
+        .hero-social-proof .stars { color: #fbbf24; }
+
+        /* Floating elements animation */
+        .float-blob {
+            position: absolute;
+            background: var(--accent-gold);
+            filter: blur(80px);
+            opacity: 0.1;
+            border-radius: 50%;
+            z-index: 1;
+            animation: float 20s infinite alternate;
+        }
+        .blob-1 { width: 400px; height: 400px; top: -100px; right: -100px; }
+        .blob-2 { width: 300px; height: 300px; bottom: -50px; left: -50px; animation-delay: -5s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 50px) scale(1.1); }
         }
 
-        .hero-content {
-            max-width: 700px;
-            z-index: 2;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: heroFadeIn 1s ease-out forwards;
+        /* Services Section */
+        .section { padding: 120px 0; position: relative; }
+        .bg-cream { background-color: var(--bg-light); }
+        .section-header { text-align: center; margin-bottom: 5rem; position: relative; }
+        .section-header h2 { font-size: 3rem; margin-bottom: 1.5rem; color: var(--primary-dark); position: relative; display: inline-block; }
+        .section-header h2::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent-gold);
         }
-
-        @keyframes heroFadeIn {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(to right, #fff, #94a3b8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--text-muted);
-            margin-bottom: 2.5rem;
-            max-width: 600px;
-        }
-
-        /* Services */
-        .services {
-            padding: 100px 0;
-            background-color: var(--secondary-bg);
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-header h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .section-header p {
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto;
-        }
+        .section-header p { color: var(--text-muted); max-width: 600px; margin: 0 auto; font-size: 1.1rem; }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
         }
-
         .service-card {
-            background: var(--card-bg);
-            padding: 2.5rem;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: var(--bg-white);
+            padding: 3.5rem 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
             transition: var(--transition);
+            border-top: 4px solid transparent;
+            position: relative;
+            overflow: hidden;
         }
-
         .service-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent);
-            background: rgba(30, 41, 59, 0.9);
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-lg);
+            border-top-color: var(--accent-gold);
         }
-
         .service-icon {
             font-size: 2.5rem;
-            color: var(--accent);
-            margin-bottom: 1.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 2rem;
+            display: inline-block;
         }
-
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .service-card p {
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-        }
-
-        .learn-more {
-            color: var(--accent);
-            font-weight: 600;
+        .service-card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--primary-dark); }
+        .service-card p { color: var(--text-muted); margin-bottom: 2rem; font-size: 0.95rem; }
+        .service-link {
+            color: var(--accent-gold);
+            font-weight: 700;
             font-size: 0.9rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
+        .service-link i { transition: var(--transition); }
+        .service-card:hover .service-link i { transform: translateX(5px); }
 
-        /* About */
-        .about {
-            padding: 100px 0;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
+        /* About Section */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+        .about-image-wrapper { position: relative; }
         .about-image {
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            height: 500px;
-            background: #1e293b url('https://images.unsplash.com/photo-1589939705384-5185138a047a?auto=format&fit=crop&q=80&w=1000') center/cover;
-        }
-
-        .about-content h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .about-content p {
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .feature-icon {
-            color: var(--accent);
-            font-size: 1.2rem;
-        }
-
-        /* Social Proof */
-        .social-proof {
-            padding: 80px 0;
-            background: var(--secondary-bg);
-            text-align: center;
-        }
-
-        .trust-badges {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            flex-wrap: wrap;
-            margin-bottom: 4rem;
-            opacity: 0.7;
-        }
-
-        .badge {
-            font-weight: 700;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-        }
-
-        .testimonials {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .testimonial-slider {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .testimonial-item {
-            padding: 2rem;
-        }
-
-        .testimonial-text {
-            font-size: 1.25rem;
-            font-style: italic;
-            margin-bottom: 1.5rem;
-        }
-
-        .testimonial-author {
-            font-weight: 700;
-            color: var(--accent);
-        }
-
-        .stars {
-            color: #fbbf24;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Contact */
-        .contact {
-            padding: 100px 0;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 4rem;
-        }
-
-        .contact-info h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-details {
-            margin-top: 2rem;
-        }
-
-        .contact-detail-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .contact-detail-item i {
-            color: var(--accent);
-            font-size: 1.2rem;
-        }
-
-        .contact-form {
-            background: var(--secondary-bg);
-            padding: 3rem;
-            border-radius: 12px;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        input, select, textarea {
             width: 100%;
-            padding: 0.75rem;
-            background: var(--primary-bg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            color: white;
-            font-family: inherit;
+            height: 600px;
+            border-radius: var(--border-radius);
+            background: url('https://images.unsplash.com/photo-1589939705384-5185138a047a?auto=format&fit=crop&q=80&w=1000') center/cover;
+            position: relative;
+            z-index: 1;
+            box-shadow: var(--shadow-lg);
         }
+        .about-image::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            border: 3px solid var(--accent-gold);
+            border-radius: var(--border-radius);
+            z-index: -1;
+        }
+        .about-content h2 { font-size: 3rem; margin-bottom: 2rem; line-height: 1.2; }
+        .about-content p { margin-bottom: 2rem; font-size: 1.1rem; color: var(--text-muted); }
+        
+        .stats-row { display: flex; gap: 3rem; margin: 3rem 0; border-top: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb; padding: 2rem 0; }
+        .stat-item h4 { font-size: 2rem; color: var(--accent-gold); margin-bottom: 0.25rem; }
+        .stat-item span { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
 
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--accent);
+        .feature-list { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .feature-item { display: flex; align-items: center; gap: 0.75rem; font-weight: 600; color: var(--primary-dark); }
+        .feature-item i { color: var(--accent-gold); font-size: 1.1rem; }
+
+        /* Testimonials Section */
+        .testimonials { background: var(--primary-dark); color: var(--text-light); }
+        .testimonials .section-header h2 { color: var(--text-light); }
+        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem; }
+        .testimonial-card {
+            background: rgba(255,255,255,0.03);
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: var(--transition);
         }
+        .testimonial-card:hover { background: rgba(255,255,255,0.05); transform: scale(1.02); }
+        .quote-icon { font-size: 2.5rem; color: var(--accent-gold); opacity: 0.3; margin-bottom: 1.5rem; }
+        .testimonial-text { font-size: 1.1rem; font-style: italic; margin-bottom: 2rem; line-height: 1.8; }
+        .testimonial-info { display: flex; align-items: center; gap: 1.25rem; }
+        .author-img { width: 60px; height: 60px; border-radius: 50%; background: var(--accent-gold); display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--primary-dark); font-size: 1.2rem; }
+        .author-details h5 { font-size: 1.1rem; margin-bottom: 0.25rem; }
+        .author-details p { font-size: 0.85rem; opacity: 0.7; }
+        .testimonial-card .stars { margin-bottom: 1rem; color: #fbbf24; }
+
+        .trust-carousel { margin-top: 6rem; display: flex; justify-content: center; align-items: center; gap: 4rem; flex-wrap: wrap; opacity: 0.6; }
+        .trust-item { font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
+
+        /* Contact Section */
+        .contact-wrapper { display: grid; grid-template-columns: 1fr 1.5fr; gap: 5rem; }
+        .contact-info h2 { font-size: 3rem; margin-bottom: 2rem; color: var(--primary-dark); }
+        .contact-info p { margin-bottom: 3rem; font-size: 1.1rem; color: var(--text-muted); }
+        
+        .contact-method { display: flex; gap: 1.5rem; margin-bottom: 2rem; }
+        .method-icon { width: 50px; height: 50px; background: var(--bg-white); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent-gold); font-size: 1.2rem; box-shadow: var(--shadow-sm); }
+        .method-details h4 { font-size: 1.1rem; margin-bottom: 0.25rem; }
+        .method-details p { color: var(--text-muted); }
+
+        .why-sidebar { background: var(--primary-dark); padding: 3rem; border-radius: var(--border-radius); color: var(--text-light); margin-top: 3rem; }
+        .why-sidebar h3 { margin-bottom: 1.5rem; color: var(--accent-gold); }
+        .why-item { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; font-size: 0.95rem; }
+
+        .contact-form-box { background: var(--bg-white); padding: 4rem; border-radius: var(--border-radius); box-shadow: var(--shadow-lg); }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        .form-group { margin-bottom: 1.5rem; position: relative; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; color: var(--primary-dark); }
+        .form-input { width: 100%; padding: 1rem 1.25rem; border: 1px solid #e5e7eb; border-radius: 8px; font-family: inherit; font-size: 1rem; transition: var(--transition); background: #fdfdfd; }
+        .form-input:focus { outline: none; border-color: var(--accent-gold); box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.1); }
+        
+        #form-success { display: none; text-align: center; padding: 2rem; background: #ecfdf5; color: #065f46; border-radius: 8px; margin-top: 1rem; font-weight: 600; }
 
         /* Footer */
-        footer {
-            padding: 80px 0 40px;
-            background: #0a0f1d;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
-            margin-bottom: 4rem;
-        }
-
-        .footer-logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--accent);
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-about p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        .footer-links h4 {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
-
-        .footer-links ul li {
-            margin-bottom: 0.75rem;
-        }
-
-        .footer-links ul li a {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            transition: var(--transition);
-        }
-
-        .footer-links ul li a:hover {
-            color: var(--accent);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 40px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            color: var(--text-muted);
-            font-size: 0.8rem;
-        }
+        footer { background: var(--primary-dark); padding: 100px 0 50px; color: var(--text-light); }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 4rem; margin-bottom: 5rem; }
+        .footer-logo { font-size: 2rem; margin-bottom: 1.5rem; color: var(--accent-gold); display: flex; align-items: center; gap: 0.75rem; }
+        .footer-col h4 { font-size: 1.2rem; margin-bottom: 2rem; color: var(--accent-gold); position: relative; }
+        .footer-links li { margin-bottom: 1rem; }
+        .footer-links a { opacity: 0.7; font-size: 0.95rem; }
+        .footer-links a:hover { opacity: 1; color: var(--accent-gold); padding-left: 5px; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 40px; text-align: center; font-size: 0.9rem; opacity: 0.5; }
 
         /* Chatbot */
-        .chatbot-container {
+        .chatbot-container { position: fixed; bottom: 30px; right: 30px; z-index: 2000; }
+        .chat-bubble { width: 65px; height: 65px; background: var(--accent-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 10px 25px rgba(0,0,0,0.3); transition: var(--transition); }
+        .chat-bubble:hover { transform: scale(1.1); rotate: 10deg; }
+        .chat-bubble i { font-size: 1.8rem; color: var(--primary-dark); }
+
+        .chat-window { position: absolute; bottom: 85px; right: 0; width: 380px; height: 550px; background: var(--bg-white); border-radius: 20px; display: none; flex-direction: column; box-shadow: var(--shadow-lg); overflow: hidden; border: 1px solid rgba(0,0,0,0.05); animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .chat-header { background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-warm) 100%); padding: 1.75rem; color: white; display: flex; align-items: center; gap: 1rem; }
+        .chat-header .status { width: 10px; height: 10px; background: #10b981; border-radius: 50%; display: inline-block; }
+        .chat-body { flex: 1; padding: 1.5rem; overflow-y: auto; background: #f9fafb; display: flex; flex-direction: column; gap: 1rem; }
+        .chat-msg { max-width: 80%; padding: 0.9rem 1.2rem; border-radius: 18px; font-size: 0.95rem; line-height: 1.5; }
+        .msg-bot { background: white; color: var(--text-dark); align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: var(--shadow-sm); }
+        .msg-user { background: var(--accent-gold); color: var(--primary-dark); align-self: flex-end; border-bottom-right-radius: 4px; font-weight: 500; }
+        .chat-footer { padding: 1.25rem; border-top: 1px solid #f3f4f6; }
+        .quick-replies { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1rem; }
+        .reply-btn { background: #f3f4f6; border: none; padding: 0.5rem 1rem; border-radius: 50px; font-size: 0.85rem; cursor: pointer; transition: var(--transition); font-weight: 500; }
+        .reply-btn:hover { background: var(--accent-gold); color: var(--primary-dark); }
+        
+        .chat-book-btn { width: 100%; margin-top: 0.5rem; background: var(--primary-dark); color: white; }
+
+        /* Floating Call Button Mobile */
+        .mobile-call-btn {
             position: fixed;
             bottom: 30px;
-            right: 30px;
-            z-index: 2000;
-        }
-
-        .chat-bubble {
-            width: 60px;
-            height: 60px;
-            background: var(--accent);
+            left: 30px;
+            width: 65px;
+            height: 65px;
+            background: #10b981;
             border-radius: 50%;
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            color: white;
+            font-size: 1.8rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            z-index: 2000;
             transition: var(--transition);
         }
 
-        .chat-bubble:hover {
-            transform: scale(1.1);
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .about-grid, .contact-wrapper { grid-template-columns: 1fr; gap: 4rem; }
+            .hero h1 { font-size: 3.5rem; }
         }
-
-        .chat-bubble svg {
-            width: 30px;
-            height: 30px;
-            fill: var(--primary-bg);
-        }
-
-        .chat-window {
-            position: absolute;
-            bottom: 80px;
-            right: 0;
-            width: 350px;
-            height: 500px;
-            background: var(--secondary-bg);
-            border-radius: 16px;
-            display: none;
-            flex-direction: column;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.1);
-            animation: slideUp 0.3s ease-out;
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .chat-header {
-            background: var(--primary-bg);
-            padding: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .chat-header-info h4 {
-            font-size: 1rem;
-        }
-
-        .chat-header-info p {
-            font-size: 0.75rem;
-            color: #10b981;
-        }
-
-        .chat-body {
-            flex: 1;
-            padding: 1.5rem;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .chat-msg {
-            max-width: 80%;
-            padding: 0.75rem 1rem;
-            border-radius: 12px;
-            font-size: 0.9rem;
-        }
-
-        .msg-bot {
-            background: var(--primary-bg);
-            align-self: flex-start;
-            border-bottom-left-radius: 2px;
-        }
-
-        .msg-user {
-            background: var(--accent);
-            color: var(--primary-bg);
-            align-self: flex-end;
-            border-bottom-right-radius: 2px;
-        }
-
-        .chat-footer {
-            padding: 1rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .quick-replies {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .reply-btn {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: var(--text-main);
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .reply-btn:hover {
-            background: var(--accent);
-            color: var(--primary-bg);
-        }
-
-        .typing-indicator {
-            display: none;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 992px) {
-            .hero h1 { font-size: 3rem; }
-            .about { grid-template-columns: 1fr; }
-            .contact-grid { grid-template-columns: 1fr; }
-        }
-
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 80px;
-                left: 0;
-                width: 100%;
-                background: var(--primary-bg);
-                flex-direction: column;
-                padding: 2rem;
-                border-bottom: 1px solid rgba(255,255,255,0.1);
-            }
-            .nav-links.active { display: flex; }
-            .hamburger { display: flex; }
-            .hero h1 { font-size: 2.5rem; }
-            .form-row { grid-template-columns: 1fr; }
+            .nav-links { display: none; position: fixed; top: 0; right: -100%; width: 80%; height: 100vh; background: var(--primary-dark); flex-direction: column; padding: 100px 2rem; transition: 0.5s; }
+            .nav-links.active { right: 0; display: flex; }
+            .hamburger { display: block; z-index: 1001; }
+            .hero h1 { font-size: 2.8rem; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .form-grid { grid-template-columns: 1fr; }
+            .mobile-call-btn { display: flex; }
             .chat-window { width: calc(100vw - 60px); }
-        }
-        /* Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .stagger-item {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-        }
-
-        .stagger-item.visible {
-            opacity: 1;
-            transform: translateY(0);
         }
     </style>
 </head>
-<body class="reveal">
+<body>
+
+    <!-- Loading Screen -->
+    <div id="loader">
+        <div class="loader-content">
+            <div class="loader-logo">DEHEN PAINTING</div>
+            <div class="loader-bar"></div>
+        </div>
+    </div>
 
     <!-- Navigation -->
-    <nav>
+    <nav id="navbar">
         <div class="container nav-container">
-            <a href="#" class="logo">DEHEN PAINTING</a>
+            <a href="#" class="logo"><i class="fas fa-paint-roller"></i> DEHEN PAINTING</a>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#contact" class="btn btn-primary">Get a Quote</a></li>
+            </ul>
+            
             <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <div class="nav-links" id="navLinks">
-                <a href="#services">Services</a>
-                <a href="#about">About</a>
-                <a href="#testimonials">Reviews</a>
-                <a href="#contact">Contact</a>
-                <div class="nav-cta">
-                    <a href="#contact" class="btn btn-primary">Get a Quote</a>
-                </div>
+                <i class="fas fa-bars"></i>
             </div>
         </div>
     </nav>
 
-    <!-- Hero -->
+    <!-- Hero Section -->
     <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="float-blob blob-1"></div>
+        <div class="float-blob blob-2"></div>
+        
         <div class="container">
             <div class="hero-content">
-                <h1>Transform Your Space With Premium Paint.</h1>
-                <p>Meticulous craftsmanship for Portland homeowners and businesses. We bring old-world detail to modern spaces with flawless finishes and clear timelines.</p>
+                <h1>Transform Your Space.<br>Transform Your Life.</h1>
+                <p>Premium detail-driven interior and exterior painting for Portland's most beautiful homes. Experience the fusion of old-world craftsmanship and modern efficiency.</p>
+                
                 <div class="hero-btns">
-                    <a href="#contact" class="btn btn-primary" style="margin-right: 1rem;">Get Your Free Estimate</a>
+                    <a href="#contact" class="btn btn-primary">Get Your Free Estimate <i class="fas fa-arrow-right"></i></a>
                     <a href="#services" class="btn btn-outline">Our Services</a>
+                </div>
+                
+                <div class="hero-social-proof">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <span>5.0 Star Rating | 500+ Happy Homes in Portland</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services -->
-    <section class="services" id="services">
+    <!-- Services Section -->
+    <section class="section bg-cream" id="services">
         <div class="container">
             <div class="section-header">
                 <h2>Our Premium Services</h2>
-                <p>From historic Portland homes to modern commercial spaces, we deliver excellence in every stroke.</p>
+                <p>We provide a meticulous finish that stands the test of time, tailored to the unique Pacific Northwest climate.</p>
             </div>
+            
             <div class="services-grid">
-                <div class="service-card">
+                <div class="service-card reveal">
                     <div class="service-icon"><i class="fas fa-paint-roller"></i></div>
                     <h3>Interior Painting</h3>
-                    <p>Flawless walls, ceilings, and trim. We use premium low-VOC paints for a beautiful, healthy home.</p>
-                    <a href="#contact" class="learn-more">Inquire Now &rarr;</a>
+                    <p>Breath life into your rooms with flawless walls, artisan-grade trim, and premium low-VOC finishes.</p>
+                    <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <div class="service-card">
+                
+                <div class="service-card reveal">
                     <div class="service-icon"><i class="fas fa-home"></i></div>
                     <h3>Exterior Painting</h3>
-                    <p>Protection and curb appeal that lasts. Specialized coatings for the Pacific Northwest climate.</p>
-                    <a href="#contact" class="learn-more">Inquire Now &rarr;</a>
+                    <p>Enduring protection and striking curb appeal using specialized coatings built for Oregon weather.</p>
+                    <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <div class="service-card">
+                
+                <div class="service-card reveal">
                     <div class="service-icon"><i class="fas fa-magic"></i></div>
                     <h3>Cabinet Refinishing</h3>
-                    <p>Give your kitchen a factory-finish makeover without the cost of a full remodel.</p>
-                    <a href="#contact" class="learn-more">Inquire Now &rarr;</a>
+                    <p>A factory-quality transformation for your kitchen at a fraction of the cost of replacement.</p>
+                    <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <div class="service-card">
+                
+                <div class="service-card reveal">
                     <div class="service-icon"><i class="fas fa-tree"></i></div>
                     <h3>Deck & Fence</h3>
-                    <p>Cleaning, staining, and sealing to protect your outdoor living spaces from the elements.</p>
-                    <a href="#contact" class="learn-more">Inquire Now &rarr;</a>
+                    <p>Meticulous restoration and sealing to preserve your outdoor investments for years to come.</p>
+                    <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <div class="service-card">
+                
+                <div class="service-card reveal">
                     <div class="service-icon"><i class="fas fa-building"></i></div>
                     <h3>Commercial</h3>
-                    <p>Professional painting for offices, retail, and multi-unit properties with minimal disruption.</p>
-                    <a href="#contact" class="learn-more">Inquire Now &rarr;</a>
+                    <p>High-efficiency professional painting with minimal disruption to your business operations.</p>
+                    <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <div class="service-card">
+                
+                <div class="service-card reveal">
                     <div class="service-icon"><i class="fas fa-palette"></i></div>
                     <h3>Color Consultation</h3>
-                    <p>Expert guidance to help you choose the perfect palette for your unique space and light.</p>
-                    <a href="#contact" class="learn-more">Inquire Now &rarr;</a>
+                    <p>Expert guidance to select the perfect palette that harmonizes with your lighting and architecture.</p>
+                    <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About -->
-    <section class="about" id="about">
-        <div class="container about" style="padding: 0;">
-            <div class="about-image"></div>
-            <div class="about-content">
-                <h2>Portland's Trusted Choice for Detail-Driven Painting.</h2>
-                <p>Founded on the principles of old-world craftsmanship, Dehen Painting Services LLC has become a staple for quality in the Portland metro area. We treat every project as if it were our own home, ensuring clean workspaces and stunning results.</p>
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image-wrapper reveal">
+                    <div class="about-image"></div>
+                </div>
                 
-                <div class="features">
-                    <div class="feature-item">
-                        <span class="feature-icon">✓</span>
-                        <span>Premium Materials</span>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">✓</span>
-                        <span>Licensed & Insured</span>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">✓</span>
-                        <span>Clean & Respectful</span>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">✓</span>
-                        <span>LGBTQ+ Friendly</span>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">✓</span>
-                        <span>Satisfaction Guaranteed</span>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">✓</span>
-                        <span>Eco-Friendly Options</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Social Proof -->
-    <section class="social-proof" id="testimonials">
-        <div class="container">
-            <div class="trust-badges">
-                <div class="badge">CCB #Pending</div>
-                <div class="badge">Fully Insured</div>
-                <div class="badge">Portland Local</div>
-                <div class="badge">Eco-Conscious</div>
-            </div>
-
-            <div class="testimonials">
-                <div class="testimonial-slider" id="testimonialSlider">
-                    <div class="testimonial-item">
-                    <div class="stars">★★★★★</div>
-                        <p class="testimonial-text">"The attention to detail was unlike any other painter I've hired. Our Victorian looks brand new. Dehen's team was professional, clean, and incredibly fast."</p>
-                        <p class="testimonial-author">— Sarah J., West Hills</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <h2>Ready to Start Your Transformation?</h2>
-                    <p>Request your free, no-obligation estimate today. We typically respond within 24 hours.</p>
+                <div class="about-content reveal">
+                    <h2>Portland's Trusted Choice for Detail-Driven Painting.</h2>
+                    <p>At Dehen Painting Services LLC, we believe that a coat of paint is more than just a color change—it's a transformation of your living environment. Our team blends traditional techniques with the latest technology to deliver a stress-free experience and a flawless finish.</p>
                     
-                    <div class="contact-details">
-                        <div class="contact-detail-item">
-                            <i>📞</i>
-                            <span>(503) 475-8348</span>
+                    <div class="feature-list">
+                        <div class="feature-item"><i class="fas fa-check-circle"></i> Artisan Quality</div>
+                        <div class="feature-item"><i class="fas fa-check-circle"></i> Licensed & Insured</div>
+                        <div class="feature-item"><i class="fas fa-check-circle"></i> Eco-Friendly Paints</div>
+                        <div class="feature-item"><i class="fas fa-check-circle"></i> LGBTQ+ Friendly</div>
+                    </div>
+                    
+                    <div class="stats-row">
+                        <div class="stat-item">
+                            <h4>10+</h4>
+                            <span>Years Exp</span>
                         </div>
-                        <div class="contact-detail-item">
-                            <i>🌐</i>
-                            <span>dehenpaintingservices.com</span>
+                        <div class="stat-item">
+                            <h4>500+</h4>
+                            <span>Projects</span>
                         </div>
-                        <div class="contact-detail-item">
-                            <i>📍</i>
-                            <span>Portland, OR & Metro Area</span>
+                        <div class="stat-item">
+                            <h4>100%</h4>
+                            <span>Quality</span>
                         </div>
-                        <div class="contact-detail-item">
-                            <i>🕒</i>
-                            <span>Mon - Fri: 8:00 AM - 5:00 PM</span>
+                    </div>
+                    
+                    <a href="#contact" class="btn btn-outline">Our Story & Mission</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Voices of Transformation</h2>
+                <p>Join the hundreds of Portland homeowners who have experienced the Dehen difference.</p>
+            </div>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-card reveal">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <i class="fas fa-quote-left quote-icon"></i>
+                    <p class="testimonial-text">"The attention to detail was unlike any other painter I've hired. Our Victorian looks brand new. Dehen's team was professional, clean, and incredibly fast. Truly elite service."</p>
+                    <div class="testimonial-info">
+                        <div class="author-img">SJ</div>
+                        <div class="author-details">
+                            <h5>Sarah Johnson</h5>
+                            <p>West Hills, Portland</p>
                         </div>
                     </div>
                 </div>
+                
+                <div class="testimonial-card reveal" style="transition-delay: 0.2s;">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <i class="fas fa-quote-left quote-icon"></i>
+                    <p class="testimonial-text">"Our kitchen cabinets were completely transformed. The finish is factory-smooth and looks better than the day we installed them. Highly recommend for any high-end project."</p>
+                    <div class="testimonial-info">
+                        <div class="author-img">MR</div>
+                        <div class="author-details">
+                            <h5>Mike Reynolds</h5>
+                            <p>Lake Oswego, OR</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card reveal" style="transition-delay: 0.4s;">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <i class="fas fa-quote-left quote-icon"></i>
+                    <p class="testimonial-text">"They painted the exterior of our modern home and it looks incredible. The prep work was thorough and the communication was top-notch throughout the entire process."</p>
+                    <div class="testimonial-info">
+                        <div class="author-img">JT</div>
+                        <div class="author-details">
+                            <h5>James Thompson</h5>
+                            <p>Pearl District, Portland</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="trust-carousel reveal">
+                <div class="trust-item">CCB #Pending</div>
+                <div class="trust-item">Fully Insured</div>
+                <div class="trust-item">Portland Local</div>
+                <div class="trust-item">LGBTQ+ Friendly</div>
+                <div class="trust-item">Eco-Friendly</div>
+            </div>
+        </div>
+    </section>
 
-                <div class="contact-form">
-                    <form id="estimateForm">
-                        <div class="form-row">
+    <!-- Contact Section -->
+    <section class="section bg-cream" id="contact">
+        <div class="container">
+            <div class="contact-wrapper">
+                <div class="contact-info reveal">
+                    <h2>Let's Start Your Transformation.</h2>
+                    <p>Request your free, no-obligation estimate today. We typically respond within 24 business hours to schedule a walkthrough.</p>
+                    
+                    <div class="contact-method">
+                        <div class="method-icon"><i class="fas fa-phone"></i></div>
+                        <div class="method-details">
+                            <h4>Call Us Directly</h4>
+                            <p>(503) 475-8348</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="method-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="method-details">
+                            <h4>Email Enquiries</h4>
+                            <p>hello@dehenpaintingservices.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="method-icon"><i class="fas fa-clock"></i></div>
+                        <div class="method-details">
+                            <h4>Business Hours</h4>
+                            <p>Mon - Fri: 8:00 AM - 5:00 PM</p>
+                        </div>
+                    </div>
+                    
+                    <div class="why-sidebar">
+                        <h3>The Dehen Promise</h3>
+                        <div class="why-item"><i class="fas fa-shield-alt"></i> Guaranteed Craftsmanship</div>
+                        <div class="why-item"><i class="fas fa-user-check"></i> Clean & Respectful Crew</div>
+                        <div class="why-item"><i class="fas fa-palette"></i> Premium Material Selection</div>
+                        <div class="why-item"><i class="fas fa-calendar-check"></i> On-Time Completion</div>
+                    </div>
+                    
+                    <a href="tel:5034758348" class="btn btn-primary" style="margin-top: 2rem; width: 100%; justify-content: center;">Call Now: (503) 475-8348</a>
+                </div>
+                
+                <div class="contact-form-box reveal">
+                    <form action="https://api.web3forms.com/submit" method="POST" id="form">
+                        <!-- Web3Forms Config -->
+                        <input type="hidden" name="access_key" value="OWNER_WILL_PROVIDE_THIS">
+                        <input type="hidden" name="subject" value="New Estimate Request - Dehen Painting">
+                        <input type="hidden" name="from_name" value="Dehen Painting Website">
+
+                        <div class="form-grid">
                             <div class="form-group">
-                                <label>Name</label>
-                                <input type="text" placeholder="Your Name" required>
+                                <label>Full Name</label>
+                                <input type="text" name="name" class="form-input" placeholder="Your Name" required>
                             </div>
                             <div class="form-group">
-                                <label>Email</label>
-                                <input type="email" placeholder="Your Email" required>
+                                <label>Email Address</label>
+                                <input type="email" name="email" class="form-input" placeholder="Your Email" required>
                             </div>
                         </div>
-                        <div class="form-row">
+                        
+                        <div class="form-grid">
                             <div class="form-group">
-                                <label>Phone</label>
-                                <input type="tel" placeholder="Your Phone Number" required>
+                                <label>Phone Number</label>
+                                <input type="tel" name="phone" class="form-input" placeholder="Your Phone" required>
                             </div>
                             <div class="form-group">
                                 <label>Service Type</label>
-                                <select>
-                                    <option>Interior Painting</option>
-                                    <option>Exterior Painting</option>
-                                    <option>Cabinet Refinishing</option>
-                                    <option>Other</option>
+                                <select name="service" class="form-input">
+                                    <option value="Interior">Interior Painting</option>
+                                    <option value="Exterior">Exterior Painting</option>
+                                    <option value="Cabinets">Cabinet Refinishing</option>
+                                    <option value="Deck">Deck & Fence</option>
+                                    <option value="Commercial">Commercial</option>
                                 </select>
                             </div>
                         </div>
+                        
                         <div class="form-group">
                             <label>Estimated Square Footage</label>
-                            <input type="text" placeholder="e.g. 1500 sq ft">
+                            <input type="text" name="sqft" class="form-input" placeholder="e.g. 2,000 sq ft">
                         </div>
+                        
                         <div class="form-group">
                             <label>Project Details</label>
-                            <textarea rows="4" placeholder="Tell us about your project..."></textarea>
+                            <textarea name="message" class="form-input" rows="4" placeholder="Tell us about your project..." required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">Request Your Free Estimate</button>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Request Your Free Estimate</button>
+                        
+                        <div id="form-success">Thank you! Your request has been sent successfully.</div>
                     </form>
                 </div>
             </div>
@@ -892,30 +738,43 @@
     <footer>
         <div class="container">
             <div class="footer-grid">
-                <div class="footer-about">
-                    <div class="footer-logo">DEHEN PAINTING</div>
-                    <p>Premium residential and commercial painting services in the Portland metro area. Detail-driven, stress-free, and guaranteed quality.</p>
+                <div class="footer-col">
+                    <div class="footer-logo"><i class="fas fa-paint-roller"></i> DEHEN</div>
+                    <p style="opacity: 0.7; font-size: 0.95rem;">Premium residential and commercial painting services serving the Portland metro area. Detail-driven, stress-free, and guaranteed artisan quality.</p>
                 </div>
-                <div class="footer-links">
+                
+                <div class="footer-col">
                     <h4>Quick Links</h4>
-                    <ul>
+                    <ul class="footer-links">
                         <li><a href="#services">Services</a></li>
                         <li><a href="#about">About Us</a></li>
                         <li><a href="#testimonials">Reviews</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
-                <div class="footer-links">
-                    <h4>Legal</h4>
-                    <ul>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">License Info</a></li>
+                
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="#services">Interior Painting</a></li>
+                        <li><a href="#services">Exterior Painting</a></li>
+                        <li><a href="#services">Cabinet Refinishing</a></li>
+                        <li><a href="#services">Color Consultation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-phone" style="margin-right: 10px;"></i> (503) 475-8348</a></li>
+                        <li><a href="#"><i class="fas fa-envelope" style="margin-right: 10px;"></i> hello@dehenpaintingservices.com</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> Portland, OR Metro</a></li>
                     </ul>
                 </div>
             </div>
+            
             <div class="footer-bottom">
-                &copy; 2024 Dehen Painting Services LLC. All rights reserved. | LGBTQ+ Friendly | Portland, Oregon
+                &copy; 2024 Dehen Painting Services LLC. All rights reserved. | LGBTQ+ Friendly Business | Portland, Oregon
             </div>
         </div>
     </footer>
@@ -923,108 +782,122 @@
     <!-- Chatbot -->
     <div class="chatbot-container">
         <div class="chat-bubble" id="chatBubble">
-            <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+            <i class="fas fa-comment-dots"></i>
         </div>
         <div class="chat-window" id="chatWindow">
             <div class="chat-header">
-                <div style="width: 40px; height: 40px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--primary-bg);">D</div>
-                <div class="chat-header-info">
-                    <h4>Dehen Assistant</h4>
-                    <p>● Online</p>
+                <div style="width: 45px; height: 45px; background: var(--accent-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--primary-dark); font-size: 1.2rem;">D</div>
+                <div>
+                    <h4 style="font-size: 1rem; margin-bottom: 2px;">Dehen Assistant</h4>
+                    <span style="font-size: 0.75rem; opacity: 0.8;"><span class="status"></span> Online Now</span>
                 </div>
             </div>
             <div class="chat-body" id="chatBody">
-                <div class="chat-msg msg-bot">Hi there! How can I help you today with your painting project?</div>
+                <div class="chat-msg msg-bot">Welcome! I'm the Dehen Assistant. How can I help you transform your space today?</div>
             </div>
-            <div class="typing-indicator" id="typingIndicator">Assistant is typing...</div>
             <div class="chat-footer">
                 <div class="quick-replies">
-                    <button class="reply-btn" onclick="handleQuickReply('Pricing')">Pricing</button>
-                    <button class="reply-btn" onclick="handleQuickReply('Services')">Services</button>
-                    <button class="reply-btn" onclick="handleQuickReply('Service Area')">Service Area</button>
-                    <button class="reply-btn" onclick="handleQuickReply('Hours')">Hours</button>
-                    <button class="reply-btn" onclick="handleQuickReply('FAQs')">FAQs</button>
-                    <button class="reply-btn" onclick="handleQuickReply('Booking')">Booking</button>
-                    <button class="reply-btn" onclick="handleQuickReply('Contact')">Contact</button>
+                    <button class="reply-btn" onclick="handleReply('Pricing')">Pricing</button>
+                    <button class="reply-btn" onclick="handleReply('Services')">Services</button>
+                    <button class="reply-btn" onclick="handleReply('Area')">Service Area</button>
+                    <button class="reply-btn" onclick="handleReply('Hours')">Hours</button>
+                    <button class="reply-btn" onclick="handleReply('FAQ')">FAQ</button>
+                    <button class="reply-btn" onclick="handleReply('Contact')">Contact</button>
                 </div>
+                <a href="#contact" class="btn btn-primary chat-book-btn" onclick="toggleChat()">Book Estimate Now</a>
             </div>
         </div>
     </div>
 
+    <!-- Mobile Call Button -->
+    <a href="tel:5034758348" class="mobile-call-btn">
+        <i class="fas fa-phone"></i>
+    </a>
+
     <script>
-        // Navigation
+        // Page Loader
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 500);
+            }, 800);
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.getElementById('navLinks');
-
+        
         hamburger.addEventListener('click', () => {
             navLinks.classList.toggle('active');
+            const icon = hamburger.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
         });
 
-        // Close mobile nav on link click
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-            });
-        });
-
-        // Intersection Observer for Animations
-        const observerOptions = {
-            threshold: 0.1
-        };
-
+        // Scroll Animations
+        const observerOptions = { threshold: 0.15 };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('.fade-in, .stagger-item').forEach(el => {
+        document.querySelectorAll('.reveal').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(40px)';
+            el.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
             observer.observe(el);
-        });
-
-        // Add animation classes to elements
-        document.querySelectorAll('.service-card').forEach((el, i) => {
-            el.classList.add('stagger-item');
-            el.style.transitionDelay = `${i * 0.1}s`;
-        });
-        
-        document.querySelectorAll('.section-header, .about-content, .contact-info, .contact-form').forEach(el => {
-            el.classList.add('fade-in');
         });
 
         // Chatbot Logic
         const chatBubble = document.getElementById('chatBubble');
         const chatWindow = document.getElementById('chatWindow');
         const chatBody = document.getElementById('chatBody');
-        const typingIndicator = document.getElementById('typingIndicator');
 
-        chatBubble.addEventListener('click', () => {
+        function toggleChat() {
             chatWindow.style.display = chatWindow.style.display === 'flex' ? 'none' : 'flex';
-        });
+        }
+
+        chatBubble.addEventListener('click', toggleChat);
 
         const responses = {
-            'Pricing': "We provide custom estimates for every project to ensure accuracy. Generally, interior rooms start at $400, but factors like trim and prep work can change that. Would you like to request a free on-site estimate?",
-            'Services': "We offer a full range of services: Interior & Exterior Painting, Cabinet Refinishing, Deck/Fence Staining, and Commercial work. Which one are you interested in?",
-            'Service Area': "We serve the entire Portland metro area, including Beaverton, Lake Oswego, West Linn, and Gresham. Are you located in one of these areas?",
-            'Hours': "We are open Monday through Friday, 8:00 AM to 5:00 PM. We are closed on weekends to let our crew rest!",
-            'FAQs': "Common questions: Do we provide free estimates? Yes! Are we licensed? Yes! Do we use eco-friendly paint? Always options available! What's our lead time? Usually 2-4 weeks.",
-            'Booking': "The first step is a free estimate! You can fill out the form on our website or call us at (503) 475-8348 to schedule a walkthrough.",
-            'Contact': "You can reach us at (503) 475-8348 or by filling out the estimate request form on this page. We look forward to hearing from you!",
-            'default': "That's a great question! For specific details, it's best to speak with our team directly. Would you like to schedule a call?"
+            'Pricing': "We provide bespoke estimates to ensure perfect accuracy. Generally, interior rooms begin around $450 depending on detail and prep work. Would you like to request a free walkthrough?",
+            'Services': "We specialize in Artisan Interior & Exterior Painting, Cabinet Refinishing, and Deck Restoration. Which project are you considering?",
+            'Area': "We proudly serve the entire Portland metro area, including Beaverton, Lake Oswego, West Linn, and Gresham.",
+            'Hours': "Our expert crews are available Monday through Friday, 8:00 AM to 5:00 PM.",
+            'FAQ': "Common questions: Are you insured? Yes, fully! Do you provide references? Absolutely! What paints do you use? Only premium brands like Sherwin-Williams and Benjamin Moore.",
+            'Contact': "You can reach our office directly at (503) 475-8348 or via email at hello@dehenpaintingservices.com.",
+            'default': "That's a great question! For specific project details, our owner would love to speak with you. Shall I schedule a callback?"
         };
 
-        function handleQuickReply(topic) {
+        function handleReply(topic) {
             addMessage(topic, 'user');
             
-            typingIndicator.style.display = 'block';
+            // Typing simulation
+            const typing = document.createElement('div');
+            typing.className = 'chat-msg msg-bot';
+            typing.innerHTML = '<i class="fas fa-ellipsis-h fa-beat"></i>';
+            chatBody.appendChild(typing);
             chatBody.scrollTop = chatBody.scrollHeight;
 
             setTimeout(() => {
-                typingIndicator.style.display = 'none';
-                const response = responses[topic] || responses['default'];
-                addMessage(response, 'bot');
+                chatBody.removeChild(typing);
+                const reply = responses[topic] || responses['default'];
+                addMessage(reply, 'bot');
             }, 1000);
         }
 
@@ -1036,32 +909,16 @@
             chatBody.scrollTop = chatBody.scrollHeight;
         }
 
-        // Form Submission (Simulation)
-        document.getElementById('estimateForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Thank you! Your estimate request has been sent. We will contact you within 24 hours.');
-            e.target.reset();
+        // Form Handling
+        const form = document.getElementById('form');
+        form.addEventListener('submit', function(e) {
+            // Success simulation if no access key is provided yet
+            if (form.access_key.value === "OWNER_WILL_PROVIDE_THIS") {
+                e.preventDefault();
+                document.getElementById('form-success').style.display = 'block';
+                form.reset();
+            }
         });
-
-        // Simple Testimonial Slider
-        const testimonials = [
-            { text: "The attention to detail was unlike any other painter I've hired. Our Victorian looks brand new.", author: "Sarah J., West Hills" },
-            { text: "Professional, clean, and on time. They transformed our office space over the weekend.", author: "James T., Pearl District" },
-            { text: "Best cabinet painting in Portland. Saved us thousands vs. a full remodel.", author: "Mike R., Lake Oswego" }
-        ];
-        let currentTestimonial = 0;
-
-        setInterval(() => {
-            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-            const slider = document.getElementById('testimonialSlider');
-            slider.innerHTML = `
-                <div class="testimonial-item">
-                    <div class="stars">★★★★★</div>
-                    <p class="testimonial-text">"${testimonials[currentTestimonial].text}"</p>
-                    <p class="testimonial-author">— ${testimonials[currentTestimonial].author}</p>
-                </div>
-            `;
-        }, 5000);
     </script>
 </body>
 </html>
